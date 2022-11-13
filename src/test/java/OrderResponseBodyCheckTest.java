@@ -1,7 +1,7 @@
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import model.Order;
-import model.OrderClient;
+import client.OrderClient;
 import model.OrderData;
 import org.junit.Test;
 

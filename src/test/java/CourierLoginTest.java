@@ -1,7 +1,7 @@
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import model.Courier;
-import model.CourierClient;
+import client.CourierClient;
 import model.CourierLogin;
 import org.junit.After;
 import org.junit.Before;

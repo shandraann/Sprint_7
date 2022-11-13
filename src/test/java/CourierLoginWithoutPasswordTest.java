@@ -1,6 +1,6 @@
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
-import model.CourierClient;
+import client.CourierClient;
 import model.CourierLogin;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;

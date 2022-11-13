@@ -1,7 +1,7 @@
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import model.Courier;
-import model.CourierClient;
+import client.CourierClient;
 import model.CourierLogin;
 import org.junit.After;
 import org.junit.Before;
@@ -48,30 +48,6 @@ public class CourierCreationTest {
         courierId = courierClient.login(CourierLogin.from(courier)).extract().path("id");
         assertThat(statusCode, equalTo(201));
         assertTrue(isCourierCreated);
-    }
-
-    @Test
-    @DisplayName("Создание двух одинаковых курьеров")
-    public void duplicatedCourierCreationTest(){
-        courier = new Courier("Vasyyan", "random", "Vasillisk");
-        courierClient.createCourier(courier);
-        courierId = courierClient.login(CourierLogin.from(courier)).extract().path("id");
-        courier = new Courier("Vasyyan", "random", "Vasillisk");
-        ValidatableResponse response = courierClient.createCourier(courier);
-        int statusCode = response.extract().statusCode();
-        assertThat(statusCode, equalTo(409));
-    }
-
-    @Test
-    @DisplayName("Создание курьеров с одинаковыми логинами")
-    public void duplicatedLoginTest(){
-        courier = new Courier("Strike", "1234rere", "Pavel");
-        courierClient.createCourier(courier);
-        courierId = courierClient.login(CourierLogin.from(courier)).extract().path("id");
-        courier = new Courier("Strike", "09874te", "Sasha");
-        ValidatableResponse response = courierClient.createCourier(courier);
-        int statusCode = response.extract().statusCode();
-        assertThat(statusCode, equalTo(409));
     }
 
 }

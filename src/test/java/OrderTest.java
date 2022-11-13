@@ -1,14 +1,14 @@
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import model.Order;
-import model.OrderClient;
+import client.OrderClient;
 import model.OrderData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import static org.hamcrest.CoreMatchers.equalTo;
+
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNotNull;
 
 @RunWith(Parameterized.class)
 public class OrderTest {
@@ -18,7 +18,7 @@ public class OrderTest {
         this.colour = colour;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные для проверки заказа самоката: {0} {1} {2} {3}, где {0},{1},{2},{3} - индексы параметров")
     public static Object[][] colorTestData() {
         return new Object[][]{
                 {new String[]{"BLACK"}},
@@ -45,7 +45,7 @@ public class OrderTest {
         OrderClient orderClient = new OrderClient();
         ValidatableResponse response = orderClient.create(order);
         int orderTrack = response.extract().path("track");
-        assertNotNull(orderTrack);
+        assertThat(orderTrack, is(not(0)));
     }
 
 }
